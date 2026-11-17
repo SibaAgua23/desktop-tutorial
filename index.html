@@ -67,28 +67,7 @@ section{padding:7rem 3rem}
 .stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--sun);line-height:1}
 .stat-lbl{font-size:.78rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
 
-.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:3rem;align-items:start}
-.timeline{position:relative;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--border)}
-.tl-item{position:relative;padding-bottom:2rem}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:'';position:absolute;left:-2rem;top:4px;width:10px;height:10px;border-radius:50%;background:var(--night);border:2px solid var(--sun)}
-.tl-year{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:.4rem;display:inline-block}
-.tl-item h4{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:.2rem}
-.tl-item .tl-org{font-size:.85rem;color:var(--sun);margin-bottom:.5rem;display:block}
-.tl-item p{color:rgba(255,248,240,.5);font-size:.88rem;line-height:1.6;font-weight:300}
-
-.about-side{display:flex;flex-direction:column;gap:2.2rem}
-.side-block h4{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:1.1rem;color:var(--sun);font-weight:700}
-.side-block ul{list-style:none}
-.side-block li{font-size:.88rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
-.side-block li:last-child{border-bottom:none}
-.side-block li strong{color:var(--cream);display:block;font-weight:500}
-.side-block li span{font-size:.78rem;color:rgba(255,248,240,.4)}
-.lang-row{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
-.lang-row:last-child{border-bottom:none}
-.lang-row em{font-style:normal;color:var(--teal);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
-.skill-tags{display:flex;flex-wrap:wrap;gap:.55rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:3rem}
 .skill-tag{font-size:.74rem;padding:.4rem .9rem;border-radius:100px;border:1px solid var(--border);color:rgba(255,248,240,.65)}
 
 /* FILOSOFÍA - frases clave */
@@ -164,7 +143,7 @@ footer a:hover{color:var(--sun)}
   .nav-links{display:none}
   section{padding:5rem 1.5rem}
   .hero{padding:7rem 1.5rem 4rem}
-  .grid2,.test-grid,.frases-grid,.about-grid{grid-template-columns:1fr}
+  .grid2,.test-grid,.frases-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   footer{flex-direction:column;gap:1rem;text-align:center}
 }
@@ -237,84 +216,14 @@ footer a:hover{color:var(--sun)}
     <div class="stat-tile"><div class="stat-num">3</div><div class="stat-lbl">Titulaciones superiores acreditadas</div></div>
   </div>
 
-  <div class="about-grid">
-    <div class="timeline">
-      <div class="tl-item">
-        <span class="tl-year">2024</span>
-        <h4>Técnica Administrativa — Salud Mental</h4>
-        <span class="tl-org">Osakidetza</span>
-        <p>Gestión documental y coordinación clínico-administrativa en unidad de salud mental.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">2023</span>
-        <h4>Integradora Social — MENA 8 · Violencia de Género</h4>
-        <span class="tl-org">Zabalduz · Fundación Xilema</span>
-        <p>Acompañamiento a menores extranjeros no acompañados e intervención con mujeres víctimas de violencia de género.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">2023 — 2024</span>
-        <h4>Facilitadora de Bienestar Emocional</h4>
-        <span class="tl-org">Escuela del Presente Consciente</span>
-        <p>Talleres de mindfulness, gestión emocional y bienestar en entornos educativos y laborales.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">2004 — 2019 · 15 años</span>
-        <h4>Educadora Social — Jóvenes con TMG</h4>
-        <span class="tl-org">Hezilan para IFBS</span>
-        <p>Intervención socioeducativa con jóvenes con trastorno mental grave. Trabajo en red con familias y recursos comunitarios.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">2007 — 2011</span>
-        <h4>Integradora Social — Senidegune</h4>
-        <span class="tl-org">Vitoria-Gasteiz</span>
-        <p>Apoyo socioeducativo a familias en situación de vulnerabilidad y sensibilización comunitaria.</p>
-      </div>
-      <div class="tl-item">
-        <span class="tl-year">2002 — 2010</span>
-        <h4>Cuidadora · Formadora en Prevención</h4>
-        <span class="tl-org">Hezilan · Ayuntamiento de Vitoria-Gasteiz</span>
-        <p>Atención directa a personas dependientes y formación en prevención de riesgos laborales.</p>
-      </div>
-    </div>
-
-    <div class="about-side">
-      <div class="side-block">
-        <h4>Formación</h4>
-        <ul>
-          <li><strong>Técnica Superior en Integración Social</strong><span>CFGS · Egibide, Vitoria-Gasteiz</span></li>
-          <li><strong>Licenciatura en Biología</strong><span>Universidad del País Vasco · UPV/EHU</span></li>
-          <li><strong>Técnica Superior en PRL</strong><span>Ergonomía y Psicosociología aplicada</span></li>
-          <li><strong>Diplomado en Educación Emocional</strong><span>Formación internacional · 520 h</span></li>
-          <li><strong>Mindfulness MBSR Oficial</strong><span>Bangor University</span></li>
-          <li><strong>Ponente Internacional</strong><span>I Congreso Int. de Neuroeducación · México 2025</span></li>
-        </ul>
-      </div>
-
-      <div class="side-block">
-        <h4>Idiomas</h4>
-        <div class="lang-row"><span>Español</span><em>Nativo</em></div>
-        <div class="lang-row"><span>Inglés</span><em>Medio</em></div>
-        <div class="lang-row"><span>Euskera</span><em>Medio</em></div>
-      </div>
-
-      <div class="side-block">
-        <h4>Competencias clave</h4>
-        <div class="skill-tags">
-          <span class="skill-tag">Acompañamiento socioeducativo</span>
-          <span class="skill-tag">Inclusión social</span>
-          <span class="skill-tag">Salud mental</span>
-          <span class="skill-tag">Violencia de género</span>
-          <span class="skill-tag">Coordinación multidisciplinar</span>
-          <span class="skill-tag">Informes técnicos</span>
-          <span class="skill-tag">Dinamización grupal</span>
-          <span class="skill-tag">Recursos comunitarios</span>
-          <span class="skill-tag">Empatía y escucha activa</span>
-          <span class="skill-tag">Trabajo en equipo</span>
-          <span class="skill-tag">Adaptabilidad</span>
-          <span class="skill-tag">Resiliencia</span>
-        </div>
-      </div>
-    </div>
+  <div class="skill-tags">
+    <span class="skill-tag">Acompañamiento socioeducativo</span>
+    <span class="skill-tag">Inclusión social</span>
+    <span class="skill-tag">Salud mental</span>
+    <span class="skill-tag">Dinamización grupal</span>
+    <span class="skill-tag">Empatía y escucha activa</span>
+    <span class="skill-tag">Adaptabilidad</span>
+    <span class="skill-tag">Resiliencia</span>
   </div>
 </section>
 
