@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aktitudeando — Se vive mejor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--coral:#FF5733;--sun:#FFB627;--teal:#00B4A6;--night:#0D0D0D;--cream:#FFF8F0;--muted:rgba(255,248,240,0.6);--border:rgba(255,255,255,0.07)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--night);color:var(--cream);overflow-x:hidden;cursor:none}
+
+.cursor{width:14px;height:14px;background:var(--sun);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:difference}
+.cursor-ring{width:40px;height:40px;border:1.5px solid var(--sun);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease;mix-blend-mode:difference}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(13,13,13,.7);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--cream);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--sun)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--sun)}
+.nav-cta{background:var(--coral)!important;color:var(--cream)!important;padding:.55rem 1.4rem;border-radius:100px;transition:background .3s!important}
+.nav-cta:hover{background:var(--sun)!important;color:var(--night)!important}
+
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:8rem 3rem 5rem}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(255,182,39,.12) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(0,180,166,.1) 0%,transparent 55%),radial-gradient(ellipse 50% 50% at 90% 10%,rgba(255,87,51,.1) 0%,transparent 50%)}
+.shape{position:absolute;border-radius:50%;opacity:.07;animation:float linear infinite}
+.s1{width:300px;height:300px;background:var(--sun);top:10%;right:15%;animation-duration:20s}
+.s2{width:180px;height:180px;background:var(--coral);bottom:20%;right:30%;animation-duration:15s;animation-delay:-5s}
+.s3{width:120px;height:120px;background:var(--teal);top:60%;left:5%;animation-duration:25s;animation-delay:-10s}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}33%{transform:translateY(-30px) rotate(120deg)}66%{transform:translateY(20px) rotate(240deg)}}
+
+.hero-content{position:relative;z-index:2;max-width:820px}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,182,39,.12);border:1px solid rgba(255,182,39,.3);border-radius:100px;padding:.4rem 1rem;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sun);margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease .2s forwards}
+.badge-dot{width:6px;height:6px;background:var(--sun);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+
+h1{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,8vw,6.5rem);font-weight:900;line-height:.95;letter-spacing:-.03em;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease .4s forwards}
+h1 em{color:var(--sun);font-style:italic}
+h1 .teal{color:var(--teal)}
+.hero-p{font-size:1.1rem;line-height:1.75;color:var(--muted);max-width:560px;margin-bottom:3rem;font-weight:300;opacity:0;animation:fadeUp .8s ease .6s forwards}
+.hero-actions{display:flex;gap:1rem;align-items:center;opacity:0;animation:fadeUp .8s ease .8s forwards}
+.btn{background:var(--coral);color:var(--cream);padding:1rem 2.5rem;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:transform .3s,background .3s,box-shadow .3s}
+.btn:hover{background:var(--sun);color:var(--night);transform:translateY(-3px);box-shadow:0 20px 40px rgba(255,87,51,.3)}
+.btn-ghost{color:var(--muted);text-decoration:none;font-size:.9rem;display:inline-flex;align-items:center;gap:.5rem;transition:color .3s;padding:1rem}
+.btn-ghost:hover{color:var(--sun)}
+.btn-ghost .arr{transition:transform .3s}
+.btn-ghost:hover .arr{transform:translateX(5px)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,182,39,.03);padding:1rem 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 22s linear infinite;width:max-content}
+.mi{display:inline-flex;align-items:center;gap:1.5rem;padding:0 2rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,248,240,.35)}
+.mi .dot{color:var(--sun)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:7rem 3rem}
+.lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.2rem}
+.sec-sub{color:var(--muted);font-size:1.05rem;line-height:1.7;max-width:540px;font-weight:300}
+
+/* SOBRE MÍ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;margin-bottom:4rem}
+.stat-tile{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px;padding:1.8rem 1.2rem;text-align:center;transition:border-color .4s,transform .4s}
+.stat-tile:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.15)}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;color:var(--sun);line-height:1}
+.stat-lbl{font-size:.78rem;color:var(--muted);margin-top:.6rem;line-height:1.4}
+
+.skill-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:3rem}
+.skill-tag{font-size:.74rem;padding:.4rem .9rem;border-radius:100px;border:1px solid var(--border);color:rgba(255,248,240,.65)}
+
+/* FILOSOFÍA - frases clave */
+.frases-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.8rem;margin-top:4rem}
+.frase-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .4s,border-color .4s}
+.frase-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;border-radius:20px}
+.frase-card:nth-child(1)::before{background:radial-gradient(circle at 0% 0%,rgba(255,87,51,.1),transparent 60%)}
+.frase-card:nth-child(2)::before{background:radial-gradient(circle at 100% 0%,rgba(255,182,39,.1),transparent 60%)}
+.frase-card:nth-child(3)::before{background:radial-gradient(circle at 50% 100%,rgba(0,180,166,.1),transparent 60%)}
+.frase-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.15)}
+.frase-card:hover::before{opacity:1}
+.frase-card .emoji{font-size:2.2rem;margin-bottom:1.2rem;display:block}
+.frase-card blockquote{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;line-height:1.5;color:var(--cream);margin-bottom:1rem}
+.frase-card p{color:rgba(255,248,240,.5);font-size:.88rem;line-height:1.65;font-weight:300}
+
+/* PILARES - metodología aktitudear */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem;margin-top:4rem}
+.card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .4s,border-color .4s}
+.card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;border-radius:20px}
+.card:nth-child(1)::before{background:radial-gradient(circle at 0% 0%,rgba(255,87,51,.1),transparent 60%)}
+.card:nth-child(2)::before{background:radial-gradient(circle at 100% 0%,rgba(255,182,39,.1),transparent 60%)}
+.card:nth-child(3)::before{background:radial-gradient(circle at 0% 100%,rgba(0,180,166,.1),transparent 60%)}
+.card:nth-child(4)::before{background:radial-gradient(circle at 100% 100%,rgba(255,87,51,.08),transparent 60%)}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.15)}
+.card:hover::before{opacity:1}
+.card-num{position:absolute;top:1.8rem;right:2rem;font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:rgba(255,255,255,.04);line-height:1}
+.icon{font-size:2.2rem;margin-bottom:1.2rem;display:block}
+.card h3{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;margin-bottom:.7rem}
+.card p{color:rgba(255,248,240,.55);font-size:.93rem;line-height:1.7;font-weight:300}
+.tag{display:inline-block;margin-top:1.1rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .75rem;border-radius:100px}
+.tc{color:var(--coral);border:1px solid rgba(255,87,51,.3)}
+.ts{color:var(--sun);border:1px solid rgba(255,182,39,.3)}
+.tt{color:var(--teal);border:1px solid rgba(0,180,166,.3)}
+
+/* QUOTE BAND */
+.quote-band{background:linear-gradient(135deg,var(--coral) 0%,#FF8C42 50%,var(--sun) 100%);padding:5rem 3rem;text-align:center;position:relative;overflow:hidden}
+.quote-band::before{content:'"';position:absolute;top:-2rem;left:2rem;font-family:'Playfair Display',serif;font-size:20rem;font-weight:900;color:rgba(0,0,0,.07);line-height:1;pointer-events:none}
+.qt{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4vw,2.8rem);font-weight:700;font-style:italic;color:var(--night);max-width:750px;margin:0 auto 1.2rem;line-height:1.3;position:relative}
+.qa{font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(13,13,13,.55);font-weight:500}
+
+/* METODOLOGÍA */
+.metodo-intro{max-width:700px;color:var(--muted);font-size:1.05rem;line-height:1.8;font-weight:300;margin-bottom:4rem}
+
+/* TESTIMONIOS */
+.testimonios{background:rgba(255,255,255,.01)}
+.test-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:4rem}
+.test-card{border:1px solid var(--border);border-radius:18px;padding:2rem;transition:transform .4s,border-color .4s;position:relative}
+.test-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.15)}
+.test-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(255,182,39,.15);line-height:1;margin-bottom:.8rem}
+.test-card blockquote{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--sun);margin-bottom:1rem;line-height:1.4}
+.test-card p{color:rgba(255,248,240,.5);font-size:.88rem;line-height:1.65;font-weight:300}
+
+/* CONTACTO */
+.contacto{background:var(--night);text-align:center;padding:8rem 3rem;position:relative;overflow:hidden}
+.contacto::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 100%,rgba(255,182,39,.08),transparent)}
+.contacto .sec-title{color:var(--cream)}
+.contacto>div>p{color:var(--muted);font-size:1.05rem;max-width:560px;margin:1rem auto 2.5rem;line-height:1.7;font-weight:300}
+.contact-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+.btn-wa{background:#25D366;color:#fff;padding:1rem 2.5rem;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:none;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:transform .3s,box-shadow .3s}
+.btn-wa:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(37,211,102,.3)}
+.btn-outline{color:var(--cream);text-decoration:none;font-size:1rem;display:inline-flex;align-items:center;gap:.5rem;transition:color .3s;padding:1rem 2rem;border:1px solid var(--border);border-radius:100px}
+.btn-outline:hover{border-color:var(--sun);color:var(--sun)}
+
+footer{border-top:1px solid var(--border);padding:2.2rem 3rem;display:flex;justify-content:space-between;align-items:center;color:rgba(255,248,240,.3);font-size:.8rem}
+footer a{color:rgba(255,248,240,.3);text-decoration:none;transition:color .3s;margin-left:1.2rem}
+footer a:hover{color:var(--sun)}
+.social-links{display:flex;gap:1rem}
+.social-links a{font-size:.8rem;padding:.35rem .75rem;border:1px solid var(--border);border-radius:100px;transition:border-color .3s,color .3s}
+.social-links a:hover{border-color:var(--sun);color:var(--sun)}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:5rem 1.5rem}
+  .hero{padding:7rem 1.5rem 4rem}
+  .grid2,.test-grid,.frases-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://aktitudeando.com" class="nav-logo">Aktitu<span>deando</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#filosofia">Filosofía</a></li>
+    <li><a href="#metodologia">Metodología</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto" class="nav-cta">Conectar →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="shape s1"></div>
+  <div class="shape s2"></div>
+  <div class="shape s3"></div>
+  <div class="hero-content">
+    <div class="badge"><div class="badge-dot"></div>Neuroeducación Emocional · Vitoria-Gasteiz</div>
+    <h1>Se vive<br><em>mejor</em><br><span class="teal">aktitudeando.</span></h1>
+    <p class="hero-p">Plataforma de neuroeducación emocional que convierte la motivación en método y el crecimiento en hábito. Sin optimismo tóxico. Con humor, creatividad y propósito.</p>
+    <div class="hero-actions">
+      <a href="#metodologia" class="btn">Descubrir la metodología ✦</a>
+      <a href="#filosofia" class="btn-ghost">¿Qué es aktitudear? <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="mi">Resiliencia <span class="dot">✦</span></span>
+    <span class="mi">Creatividad <span class="dot">✦</span></span>
+    <span class="mi">Propósito <span class="dot">✦</span></span>
+    <span class="mi">Humor <span class="dot">✦</span></span>
+    <span class="mi">Neuroeducación Emocional <span class="dot">✦</span></span>
+    <span class="mi">Inteligencia Emocional <span class="dot">✦</span></span>
+    <span class="mi">Despertar · Sentir · Crear · Transformar <span class="dot">✦</span></span>
+    <span class="mi">Resiliencia <span class="dot">✦</span></span>
+    <span class="mi">Creatividad <span class="dot">✦</span></span>
+    <span class="mi">Propósito <span class="dot">✦</span></span>
+    <span class="mi">Humor <span class="dot">✦</span></span>
+    <span class="mi">Neuroeducación Emocional <span class="dot">✦</span></span>
+    <span class="mi">Inteligencia Emocional <span class="dot">✦</span></span>
+    <span class="mi">Despertar · Sentir · Crear · Transformar <span class="dot">✦</span></span>
+  </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="lbl">Quién soy</div>
+  <h2 class="sec-title">Estíbaliz Aguado Cobo<br><em>integradora</em> y educadora social</h2>
+  <p class="sec-sub">Empatía y resiliencia en crecimiento durante más de 20 años. Cada día con ilusión de aprendizaje y mejora continua. Trabajo el acompañamiento integral, la escucha activa y la construcción de vínculo como base para la inclusión.</p>
+
+  <div class="stats-grid">
+    <div class="stat-tile"><div class="stat-num">+20</div><div class="stat-lbl">Años en intervención social</div></div>
+    <div class="stat-tile"><div class="stat-num">15</div><div class="stat-lbl">Años con jóvenes con TMG</div></div>
+    <div class="stat-tile"><div class="stat-num">+1000</div><div class="stat-lbl">Personas acompañadas</div></div>
+    <div class="stat-tile"><div class="stat-num">3</div><div class="stat-lbl">Titulaciones superiores acreditadas</div></div>
+  </div>
+
+  <div class="skill-tags">
+    <span class="skill-tag">Acompañamiento socioeducativo</span>
+    <span class="skill-tag">Inclusión social</span>
+    <span class="skill-tag">Salud mental</span>
+    <span class="skill-tag">Dinamización grupal</span>
+    <span class="skill-tag">Empatía y escucha activa</span>
+    <span class="skill-tag">Adaptabilidad</span>
+    <span class="skill-tag">Resiliencia</span>
+  </div>
+</section>
+
+<!-- FILOSOFÍA -->
+<section id="filosofia">
+  <div class="lbl">El Poder de Aktitudear</div>
+  <h2 class="sec-title">Tres formas de<br>reconocerme <em>en acción</em></h2>
+  <p class="sec-sub">Aktitudear no es solo una palabra inventada. Es una filosofía de vida que representa la capacidad de enfrentar los desafíos con actitud positiva, creatividad y propósito.</p>
+
+  <div class="frases-grid">
+    <div class="frase-card">
+      <span class="emoji">🎭</span>
+      <blockquote>«La Estíbaliz que ríe mientras se cae… y se levanta bailando.»</blockquote>
+      <p>La vida, inevitablemente, nos presenta caídas. El verdadero poder reside en encontrar el humor y la ligereza incluso en los momentos más inesperados. Cada tropiezo se convierte en un nuevo paso de baile.</p>
+    </div>
+    <div class="frase-card">
+      <span class="emoji">🎨</span>
+      <blockquote>«La profesional sensible que convierte el caos en método con arte.»</blockquote>
+      <p>Mi sensibilidad no es una debilidad: es una fortaleza que permite una conexión profunda. El arte y la lógica no están reñidos — juntos generan un impacto genuino y sostenible.</p>
+    </div>
+    <div class="frase-card">
+      <span class="emoji">🌱</span>
+      <blockquote>«La soñadora con los pies en la tierra que siembra semillas de confianza en cada encuentro.»</blockquote>
+      <p>Soñar en grande con base sólida en el pragmatismo. En cada taller, mentoría o café, el propósito es empoderar a las personas para que crean en su propio potencial.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <p class="qt">Aktitudear no niega las dificultades ni promueve un optimismo tóxico. Reconoce la complejidad humana e invita a navegarla con herramientas emocionales que mantienen el equilibrio.</p>
+  <span class="qa">— Estíbaliz Aguado · Aktitudeando</span>
+</div>
+
+<!-- METODOLOGÍA -->
+<section id="metodologia">
+  <div class="lbl">Metodología Aktitudeando</div>
+  <h2 class="sec-title">Un ciclo vivo de<br><em>transformación</em></h2>
+  <p class="metodo-intro">Esta metodología cíclica refleja mi convicción de que el crecimiento personal no es lineal, sino una espiral continua de aprendizaje. Lo que la hace única: la integración constante del humor, la creatividad y una profunda ternura en cada fase.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="card-num">01</span>
+      <span class="icon">💡</span>
+      <h3>Despertar</h3>
+      <p>Mira hacia adentro con curiosidad. Toma conciencia de tus patrones, identifica limitaciones y reconoce tu potencial. Define tu destino, sentando las bases para tu transformación.</p>
+      <span class="tag ts">Conciencia</span>
+    </div>
+    <div class="card">
+      <span class="card-num">02</span>
+      <span class="icon">❤️</span>
+      <h3>Sentir</h3>
+      <p>Conecta profundamente con tus emociones — son un mapa invaluable. Abrazar la vulnerabilidad te guiará hacia tu autenticidad y sanación. Aprende a transitar y escuchar tus sentimientos.</p>
+      <span class="tag tc">Emoción</span>
+    </div>
+    <div class="card">
+      <span class="card-num">03</span>
+      <span class="icon">🎨</span>
+      <h3>Crear</h3>
+      <p>Libera tu imaginación y explora un universo de posibilidades. Experimenta nuevas formas de expresión y diseña soluciones innovadoras. Tu creatividad es una herramienta poderosa.</p>
+      <span class="tag tt">Creatividad</span>
+    </div>
+    <div class="card">
+      <span class="card-num">04</span>
+      <span class="icon">🚀</span>
+      <h3>Transformar</h3>
+      <p>Pasa a la acción implementando cambios concretos y sostenibles. Celebra cada avance y aprende de cada desafío. Tu poder para transformar tu realidad es ilimitado.</p>
+      <span class="tag tc">Acción</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+  <div class="lbl">¿Qué dicen de mí?</div>
+  <h2 class="sec-title">Voces que<br><em>resuenan</em></h2>
+  <p class="sec-sub">El impacto que busco generar: no crear dependencia, sino inspirar autonomía. No imponer métodos rígidos, sino fomentar la exploración creativa.</p>
+
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-num">01</div>
+      <blockquote>«Estíbaliz no te da soluciones… ¡te da alas con pies en la tierra!»</blockquote>
+      <p>No creo en fórmulas mágicas ni en soluciones universales. Mi objetivo es ayudarte a descubrir tus propios recursos, dándote herramientas para volar alto sin perder el contacto con la realidad.</p>
+    </div>
+    <div class="test-card">
+      <div class="test-num">02</div>
+      <blockquote>«Es una brújula emocional con mucho flow creativo.»</blockquote>
+      <p>Ayudo a las personas a orientarse en el complejo mapa de sus emociones, siempre desde un enfoque fluido y creativo. No rutas predefinidas, sino tu propio camino con herramientas de confianza.</p>
+    </div>
+    <div class="test-card">
+      <div class="test-num">03</div>
+      <blockquote>«Con Estíbaliz, cada sesión es un taller de vida, no solo terapia.»</blockquote>
+      <p>Mi metodología te impulsa a experimentar, crear e integrar nuevas herramientas en tu día a día, convirtiendo cada encuentro en una oportunidad tangible para construir la vida que deseas.</p>
+    </div>
+    <div class="test-card">
+      <div class="test-num">04</div>
+      <blockquote>«Su energía es contagiosa y su visión, transformadora. Te sientes acompañado en cada paso sin perder el horizonte.»</blockquote>
+      <p>Mi compromiso es brindarte un espacio seguro donde puedas crecer y transformar tu realidad, sintiéndote apoyado durante todo el proceso, respetando siempre tus ritmos y necesidades.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div>
+    <div class="lbl">Hablemos</div>
+    <h2 class="sec-title">¿Listo para <em>aktitudear</em>?</h2>
+    <p>Si sientes que es el momento de dar el paso hacia tu bienestar emocional, escríbeme. Sin compromisos, solo una primera toma de contacto para ver cómo puedo acompañarte en tu proceso.</p>
+    <div class="contact-btns">
+      <a href="https://wa.me/34675709803" target="_blank" rel="noopener" class="btn-wa">Escribir por WhatsApp</a>
+      <a href="mailto:estiagua@gmail.com" class="btn-outline">Enviar un correo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>&copy; 2026 Aktitudeando. Todos los derechos reservados.<a href="#">Aviso Legal</a><a href="#">Política de Privacidad</a></div>
+  <div class="social-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Cursor Custom
+  const cursor = document.getElementById('cur');
+  const ring = document.getElementById('ring');
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+    // Suavidad para el anillo exterior
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+
+  // Interacción al pasar el ratón por botones y enlaces
+  document.querySelectorAll('a, .btn, .btn-ghost, .btn-wa, .btn-outline').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      ring.style.borderColor = 'var(--coral)';
+    });
+    link.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.borderColor = 'var(--sun)';
+    });
+  });
+</script>
+</body>
+</html>
